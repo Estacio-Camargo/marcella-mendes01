@@ -28,7 +28,6 @@
 
 body {
     font: var(--text);
-    overflow: hidden;
 }
 
 .grid {
@@ -60,6 +59,13 @@ ul {
     background: linear-gradient(180deg, #E3F2FD 0%, #FFFFFF 100%);
     padding: 1.5rem;
     z-index: 1000;
+    overflow-y: auto;
+}
+
+@media (min-height: 800px) {
+    .login-screen {
+        padding: 2rem;
+    }
 }
 
 .login-card {
@@ -71,6 +77,15 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (min-width: 1200px) {
+    .login-card {
+        width: 500px;
+        padding: 2.5rem;
+    }
 }
 
 .login-brand {
