@@ -69,7 +69,7 @@ ul {
 
 @media (min-height: 800px) {
     .login-screen {
-        padding: 2rem;
+        /* padding: 2rem; */
     }
 }
 
