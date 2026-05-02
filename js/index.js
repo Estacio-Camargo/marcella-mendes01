@@ -265,7 +265,7 @@ function initLogin() {
             }
 
             loginScreen.style.display = 'none';
-            app.style.display = '';
+            app.classList.add('app-logged-in');
             errorMessage.textContent = '';
             // Rolar para o topo após login bem-sucedido
             window.scrollTo(0, 0);

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 :root {
     --font-family-open-sans: 'Open Sans', sans-serif;
     --text: 400 1rem/normal var(--font-family-open-sans);
@@ -28,6 +32,10 @@
 
 body {
     font: var(--text);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .grid {
@@ -151,7 +159,7 @@ ul {
 }
 
 form {
-
+    
     & > a {
       margin-block: 1rem;
     }

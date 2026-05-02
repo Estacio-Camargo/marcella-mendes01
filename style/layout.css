@@ -1,11 +1,15 @@
 #app {
+    display: none; /* Escondido por padrão, será mostrado após login */
+}
+
+.app-logged-in {
     display: grid;
     grid-template-columns: 280px 1fr;
     grid-template-rows: 90px auto;
     grid-template-areas: "header header"
         "aside wrapper"
         "aside wrapper";
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 .app-header {
@@ -40,8 +44,8 @@
 
     grid-area: wrapper;
     
-    height: 100vh;
-    overflow: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 90px);
 }
 
 main {
