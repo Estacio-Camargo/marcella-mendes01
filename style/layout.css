@@ -5,7 +5,7 @@
     grid-template-areas: "header header"
         "aside wrapper"
         "aside wrapper";
-    min-height: 100vh;
+    overflow: hidden;
 }
 
 .app-header {
@@ -40,6 +40,7 @@
 
     grid-area: wrapper;
     
+    height: 100vh;
     overflow: auto;
 }
 
