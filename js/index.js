@@ -84,33 +84,41 @@ function fecharCarteirinha() {
 const menuBtn = document.querySelector('.menu-hamb');
 const sidebar = document.querySelector('.sidebar');
 
-// Ouve o clique
+// Ouve o clique no menu hambúrguer
 menuBtn.addEventListener('click', () => {
     sidebar.classList.toggle('active');
+    toggleMenuIcons();
 });
 
-// DICA: Fechar o menu ao clicar em um link (opcional, mas bom para UX)
+// Função para alternar ícones do menu
+function toggleMenuIcons() {
+    const bars = menuBtn.querySelector('.fa-bars');
+    const times = menuBtn.querySelector('.fa-times');
+
+    if (sidebar.classList.contains('active')) {
+        bars.style.display = 'none';
+        times.style.display = 'block';
+    } else {
+        bars.style.display = 'block';
+        times.style.display = 'none';
+    }
+}
+
+// Fechar o menu ao clicar em um link
 const navLinks = document.querySelectorAll('.side-nav a');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         sidebar.classList.remove('active');
+        toggleMenuIcons();
     });
 });
 
-
-const menuHamb = document.querySelector('.menu-hamb');
-
-menuHamb.addEventListener('click', () => {
-  const bars = menuHamb.querySelector('.fa-bars');
-  const times = menuHamb.querySelector('.fa-times');
-
-  if (bars.style.display === 'none') {
-    bars.style.display = 'block';
-    times.style.display = 'none';
-  } else {
-    bars.style.display = 'none';
-    times.style.display = 'block';
-  }
+// Fechar o menu ao clicar no overlay (para mobile)
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && sidebar.classList.contains('active') && !sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+        sidebar.classList.remove('active');
+        toggleMenuIcons();
+    }
 });
 
 
