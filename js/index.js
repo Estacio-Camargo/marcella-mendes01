@@ -84,41 +84,33 @@ function fecharCarteirinha() {
 const menuBtn = document.querySelector('.menu-hamb');
 const sidebar = document.querySelector('.sidebar');
 
-// Ouve o clique no menu hambúrguer
+// Ouve o clique
 menuBtn.addEventListener('click', () => {
     sidebar.classList.toggle('active');
-    toggleMenuIcons();
 });
 
-// Função para alternar ícones do menu
-function toggleMenuIcons() {
-    const bars = menuBtn.querySelector('.fa-bars');
-    const times = menuBtn.querySelector('.fa-times');
-
-    if (sidebar.classList.contains('active')) {
-        bars.style.display = 'none';
-        times.style.display = 'block';
-    } else {
-        bars.style.display = 'block';
-        times.style.display = 'none';
-    }
-}
-
-// Fechar o menu ao clicar em um link
+// DICA: Fechar o menu ao clicar em um link (opcional, mas bom para UX)
 const navLinks = document.querySelectorAll('.side-nav a');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         sidebar.classList.remove('active');
-        toggleMenuIcons();
     });
 });
 
-// Fechar o menu ao clicar no overlay (para mobile)
-document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768 && sidebar.classList.contains('active') && !sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
-        sidebar.classList.remove('active');
-        toggleMenuIcons();
-    }
+
+const menuHamb = document.querySelector('.menu-hamb');
+
+menuHamb.addEventListener('click', () => {
+  const bars = menuHamb.querySelector('.fa-bars');
+  const times = menuHamb.querySelector('.fa-times');
+
+  if (bars.style.display === 'none') {
+    bars.style.display = 'block';
+    times.style.display = 'none';
+  } else {
+    bars.style.display = 'none';
+    times.style.display = 'block';
+  }
 });
 
 
@@ -201,6 +193,32 @@ function togglePasswordVisibility() {
     }
 }
 
+// Funções para salvar/recuperar credenciais
+function saveCredentials(matricula, senha) {
+    const credentials = {
+        matricula: matricula,
+        senha: senha,
+        timestamp: Date.now()
+    };
+    localStorage.setItem('estacio_credentials', JSON.stringify(credentials));
+}
+
+function loadCredentials() {
+    const saved = localStorage.getItem('estacio_credentials');
+    if (saved) {
+        try {
+            return JSON.parse(saved);
+        } catch (e) {
+            return null;
+        }
+    }
+    return null;
+}
+
+function clearCredentials() {
+    localStorage.removeItem('estacio_credentials');
+}
+
 function initLogin() {
     const loginScreen = document.getElementById('login-screen');
     const app = document.getElementById('app');
@@ -212,48 +230,48 @@ function initLogin() {
         loginDate.textContent = formatLoginDate(new Date());
     }
 
+    // Carregar credenciais salvas
+    const savedCredentials = loadCredentials();
+    if (savedCredentials) {
+        document.getElementById('login-matricula').value = savedCredentials.matricula || '';
+        document.getElementById('login-password').value = savedCredentials.senha || '';
+        document.getElementById('remember-password').checked = true;
+    }
+
     const toggleButton = document.getElementById('toggle-password');
     if (toggleButton) {
         toggleButton.addEventListener('click', togglePasswordVisibility);
     }
 
-    // Adicionar funcionalidade ao captcha
-    const captchaLabel = document.querySelector('.captcha-card');
-    const captchaCheckbox = document.getElementById('login-captcha-checkbox');
-    if (captchaLabel && captchaCheckbox) {
-        captchaLabel.addEventListener('click', (e) => {
-            // Prevenir comportamento padrão apenas se não clicou no input
-            if (e.target !== captchaCheckbox) {
-                e.preventDefault();
-                captchaCheckbox.checked = !captchaCheckbox.checked;
-            }
-        });
-    }
-
     loginForm.addEventListener('submit', event => {
         event.preventDefault();
 
-        // Pequeno delay para garantir que o DOM seja atualizado
-        setTimeout(() => {
-            const matricula = document.getElementById('login-matricula').value.trim();
-            const senha = document.getElementById('login-password').value.trim();
-            const captchaChecked = document.getElementById('login-captcha-checkbox').checked;
+        const matricula = document.getElementById('login-matricula').value.trim();
+        const senha = document.getElementById('login-password').value.trim();
+        const captchaChecked = document.getElementById('login-captcha-checkbox').checked;
+        const rememberChecked = document.getElementById('remember-password').checked;
 
-            if (!captchaChecked) {
-                errorMessage.textContent = 'Por favor, confirme que você não é um robô.';
-                return;
-            }
+        if (!captchaChecked) {
+            errorMessage.textContent = 'Por favor, confirme que você não é um robô.';
+            return;
+        }
 
-            if (matricula === LOGIN_CREDENTIALS.matricula && senha === LOGIN_CREDENTIALS.senha) {
-                loginScreen.style.display = 'none';
-                app.style.display = '';
-                errorMessage.textContent = '';
-                // Rolar para o topo após login bem-sucedido
-                window.scrollTo(0, 0);
+        if (matricula === LOGIN_CREDENTIALS.matricula && senha === LOGIN_CREDENTIALS.senha) {
+            // Salvar credenciais se "Lembrar senha" estiver marcado
+            if (rememberChecked) {
+                saveCredentials(matricula, senha);
             } else {
-                errorMessage.textContent = 'Matrícula ou senha incorretas. Tente novamente.';
+                clearCredentials();
             }
-        }, 50);
+
+            loginScreen.style.display = 'none';
+            app.style.display = '';
+            errorMessage.textContent = '';
+            // Rolar para o topo após login bem-sucedido
+            window.scrollTo(0, 0);
+        } else {
+            errorMessage.textContent = 'Matrícula ou senha incorretas. Tente novamente.';
+        }
     });
 }
 
