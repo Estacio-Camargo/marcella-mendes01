@@ -1,0 +1,76 @@
+.btn-notificacao {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &>span {
+        color: var(--text-button);
+        font-size: .7rem;
+    }
+
+
+    & .fa-bell {
+        font-size: 1.5rem;
+        color: rgb(208, 211, 211);
+        transition: color 0.1s ease;
+    }
+
+
+    & .icon-wrapper {
+        width: 40px;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid transparent;
+        border-radius: 50%;
+
+        transition: 0.1s ease-in-out;
+
+
+    }
+
+    &:hover .icon-wrapper {
+        background-color: rgb(233, 233, 233);
+    }
+
+
+    &:hover .icon-wrapper .fa-bell {
+        color: aqua;
+    }
+
+}
+
+.icon-usuario {
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid rgb(208, 211, 211);
+    position: relative;
+    cursor: pointer;
+
+
+    width: 40px;
+    height: 40px;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        bottom: 0;
+        right: 8%;
+        background-color: rgb(0, 255, 0);
+        border-radius: 50%;
+    }
+
+    & .fa-user {
+        font-size: 1rem;
+        color: rgb(208, 211, 211);
+    }
+}

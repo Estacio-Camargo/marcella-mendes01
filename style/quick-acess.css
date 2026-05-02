@@ -1,0 +1,165 @@
+.quick-access {
+
+    padding-block: .5rem 2rem;
+
+    & .header-access {
+        display: flex;
+        justify-content: center;
+        padding-block: 1.5rem;
+
+        & h2 {
+            font-size: 2.3rem;
+            color: #333;
+        }
+    }
+
+
+
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+    padding-inline: 1rem;
+    gap: 1.8rem;
+
+
+    &>article {
+        background-color: white;
+        border: 1px solid rgb(218, 205, 205);
+        border-radius: .5rem;
+        padding: .5rem .8rem;
+        min-height: 200px;
+
+
+        & .card-header {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: 1rem;
+
+            &>div.icon {
+
+
+                border-radius: 50%;
+                width: 45px;
+                aspect-ratio: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+            }
+
+            & {
+                .icon-requeriments {
+                     background-color: rgba(238, 1, 96, .2);
+
+                & .fa-file-invoice {
+                    color: rgb(238, 1, 96);
+                }
+                }
+            }
+
+            & {
+                 .icon-financeiro{
+                     background-color: rgba(128, 124, 124, 0.2);
+
+                & .fa-credit-card {
+                    color: rgb(43, 40, 41);
+                }
+                }
+            }
+
+              & {
+                 .icon-academico{
+                     background-color: rgba(229, 241, 58, 0.2);
+
+                & .fa-user-graduate {
+                    color: rgb(207, 194, 200);
+                }
+                }
+            }
+            
+
+            & h3 {
+                font-size: 1rem;
+                color: #333;
+
+            }
+
+
+        }
+
+        
+
+        &>p {
+            font-size: .9rem;
+            color: #838181;
+            font-weight: 500;
+            margin-bottom: .6rem;
+        }
+    }
+}
+
+
+
+@media(max-width: 1000px) {
+
+
+    .cards-container {
+        /* A mágica: Tente usar 350px. Se a tela for menor que 350px, use 100% da largura. */
+        /* grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); */
+        gap: .5rem;
+       
+    }
+
+    .quick-access {
+
+        .header-access {
+            padding-block: .2rem;
+
+            & h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+
+
+    }
+}
+
+.card-links {
+
+    & ul {
+        display: grid;
+        gap: .5rem;
+    }
+}
+
+.card-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4f83f5;
+    text-decoration: underline;
+}
+
+/* traço antes do link */
+.card-links a::before {
+    content: "";
+    width: 10px;
+    height: 2px;
+    background-color: orange;
+}
+
+.vc {
+    min-height: 30vh;
+    text-align: center;
+    & h2 {
+        font-size: 2rem;
+        color: #646262;
+    }
+}

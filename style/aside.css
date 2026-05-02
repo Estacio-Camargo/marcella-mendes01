@@ -1,0 +1,28 @@
+@media(max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 90px;
+        left: 0;
+        width: 90vw;
+        transform: translateX(-100%);
+        transition: transform .6s ease-in-out;
+        height: 100vh;
+        z-index: 1000;
+        background-color: white;
+
+    }
+
+    .dados-usuario, .btn-notificacao {
+        display: none;
+    }
+
+    
+}
+
+/* Coloque isso logo abaixo do seu @media da .sidebar */
+@media(max-width: 768px) {
+    .sidebar.active {
+        transform: translateX(0); /* Volta para a posição visível */
+    }
+}
+
