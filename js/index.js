@@ -172,7 +172,7 @@ document.addEventListener('click', (e) => {
 // }
 
 const LOGIN_CREDENTIALS = {
-    matricula: '10',
+    matricula: 'marcella',
     senha: '123'
 };
 
@@ -217,27 +217,43 @@ function initLogin() {
         toggleButton.addEventListener('click', togglePasswordVisibility);
     }
 
+    // Adicionar funcionalidade ao captcha
+    const captchaLabel = document.querySelector('.captcha-card');
+    const captchaCheckbox = document.getElementById('login-captcha-checkbox');
+    if (captchaLabel && captchaCheckbox) {
+        captchaLabel.addEventListener('click', (e) => {
+            // Prevenir comportamento padrão apenas se não clicou no input
+            if (e.target !== captchaCheckbox) {
+                e.preventDefault();
+                captchaCheckbox.checked = !captchaCheckbox.checked;
+            }
+        });
+    }
+
     loginForm.addEventListener('submit', event => {
         event.preventDefault();
 
-        const matricula = document.getElementById('login-matricula').value.trim();
-        const senha = document.getElementById('login-password').value.trim();
-        const captchaChecked = document.getElementById('login-captcha-checkbox').checked;
+        // Pequeno delay para garantir que o DOM seja atualizado
+        setTimeout(() => {
+            const matricula = document.getElementById('login-matricula').value.trim();
+            const senha = document.getElementById('login-password').value.trim();
+            const captchaChecked = document.getElementById('login-captcha-checkbox').checked;
 
-        if (!captchaChecked) {
-            errorMessage.textContent = 'Por favor, confirme que você não é um robô.';
-            return;
-        }
+            if (!captchaChecked) {
+                errorMessage.textContent = 'Por favor, confirme que você não é um robô.';
+                return;
+            }
 
-        if (matricula === LOGIN_CREDENTIALS.matricula && senha === LOGIN_CREDENTIALS.senha) {
-            loginScreen.style.display = 'none';
-            app.style.display = '';
-            errorMessage.textContent = '';
-            // Rolar para o topo após login bem-sucedido
-            window.scrollTo(0, 0);
-        } else {
-            errorMessage.textContent = 'Matrícula ou senha incorretas. Tente novamente.';
-        }
+            if (matricula === LOGIN_CREDENTIALS.matricula && senha === LOGIN_CREDENTIALS.senha) {
+                loginScreen.style.display = 'none';
+                app.style.display = '';
+                errorMessage.textContent = '';
+                // Rolar para o topo após login bem-sucedido
+                window.scrollTo(0, 0);
+            } else {
+                errorMessage.textContent = 'Matrícula ou senha incorretas. Tente novamente.';
+            }
+        }, 50);
     });
 }
 

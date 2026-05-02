@@ -248,6 +248,7 @@ form {
     border: 1px solid #BFC9D9;
     border-radius: 0.35rem;
     background: #fff;
+    transition: all 0.2s ease;
 }
 
 .captcha-card input:checked + .captcha-checkbox {
