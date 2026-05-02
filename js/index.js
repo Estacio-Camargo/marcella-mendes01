@@ -265,7 +265,10 @@ function initLogin() {
             }
 
             loginScreen.style.display = 'none';
-            app.style.display = 'grid';
+            // Pequeno delay para garantir transição suave
+            setTimeout(() => {
+                app.style.display = 'grid';
+            }, 50);
             errorMessage.textContent = '';
             // Rolar para o topo após login bem-sucedido
             window.scrollTo(0, 0);

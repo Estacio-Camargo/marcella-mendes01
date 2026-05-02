@@ -54,10 +54,6 @@ ul {
     
 }
 
-#app {
-    display: none;
-}
-
 .login-screen {
     position: fixed;
     inset: 0;
@@ -65,7 +61,7 @@ ul {
     align-items: center;
     justify-content: center;
     background: linear-gradient(180deg, #E3F2FD 0%, #FFFFFF 100%);
-    padding: 1.5rem;
+    /* padding: 1.5rem; */
     z-index: 1000;
     overflow-y: auto;
     min-height: 100vh;
