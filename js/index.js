@@ -172,8 +172,8 @@ document.addEventListener('click', (e) => {
 // }
 
 const LOGIN_CREDENTIALS = {
-    matricula: 'marcella',
-    senha: '123'
+    matricula: 'Marcella',
+    senha: '0823'
 };
 
 function formatLoginDate(date) {
